@@ -3,6 +3,7 @@ import cors from 'cors';
 import { env } from './config/env.js';
 import { notFound } from './middleware/notFound.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
@@ -20,8 +21,9 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ success: true, message: 'API is running' });
 });
 
-// API routes will be mounted here in the next modules:
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
+
+// Next modules:
 // app.use('/api/projects', projectRoutes);
 // app.use('/api/tasks', taskRoutes);
 
