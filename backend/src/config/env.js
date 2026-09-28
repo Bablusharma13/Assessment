@@ -11,11 +11,16 @@ if (missingVariables.length > 0) {
   throw new Error(`Missing required environment variables: ${missingVariables.join(', ')}`);
 }
 
+// CORS must allow only our own frontend, so a wildcard is refused.
+if (process.env.FRONTEND_URL.trim() === '*') {
+  throw new Error('FRONTEND_URL must be the exact frontend URL, not "*"');
+}
+
 export const env = {
   port: Number(process.env.PORT),
   mongodbUri: process.env.MONGODB_URI,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: '1d',
-  // Browsers send the Origin without a trailing slash, so remove one if present.
-  frontendUrl: process.env.FRONTEND_URL.replace(/\/+$/, ''),
+  // Browsers send the Origin without a trailing slash, so remove one (and stray spaces) if present.
+  frontendUrl: process.env.FRONTEND_URL.trim().replace(/\/+$/, ''),
 };
