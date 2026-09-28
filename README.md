@@ -2,12 +2,12 @@
 
 A simple internal tool where a logged-in user creates projects, adds tasks to them and moves each task through **Todo → In Progress → Done**. Every user sees only their own data.
 
-| Deliverable       | Link                                   |
-| ----------------- | -------------------------------------- |
-| Frontend (Vercel) | `<VERCEL_URL>`                         |
-| Backend (Render)  | `<RENDER_URL>` (health: `/api/health`) |
-| GitHub repository | `<GITHUB_REPO_URL>`                    |
-| FRD & planning    | [docs/PLANNING.md](docs/PLANNING.md)   |
+| Deliverable       | Link                                        |
+| ----------------- | ------------------------------------------- |
+| Frontend (Vercel) | `<VERCEL_URL>`                              |
+| Backend (Render)  | `<RENDER_URL>` (health: `/api/health`)      |
+| GitHub repository | https://github.com/Bablusharma13/Assessment |
+| FRD & planning    | [docs/PLANNING.md](docs/PLANNING.md)        |
 
 ## Features
 
