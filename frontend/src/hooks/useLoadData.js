@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 export function useLoadData(load) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function useLoadData(load) {
         if (!ignore) setData(result);
       })
       .catch((loadError) => {
-        if (!ignore) setError(loadError.message);
+        if (!ignore) setError(loadError);
       })
       .finally(() => {
         if (!ignore) setIsLoading(false);
@@ -30,10 +30,13 @@ export function useLoadData(load) {
 
   function retry() {
     setIsLoading(true);
-    setError('');
+    setError(null);
     setAttempt((current) => current + 1);
   }
 
+  // Retrying only helps when the server was unreachable or failed (not for 403/404).
+  const canRetry = Boolean(error) && (error.status === 0 || error.status >= 500);
+
   // setData lets the page update the list after create/edit/delete without reloading.
-  return { data, setData, isLoading, error, retry };
+  return { data, setData, isLoading, error: error?.message ?? '', canRetry, retry };
 }

@@ -18,6 +18,7 @@ export function ProjectListPage() {
     setData: setProjects,
     isLoading,
     error,
+    canRetry,
     retry,
   } = useLoadData(projectService.getProjects);
 
@@ -56,7 +57,7 @@ export function ProjectListPage() {
   }
 
   if (error) {
-    return <ErrorMessage message={error} onRetry={retry} />;
+    return <ErrorMessage message={error} onRetry={canRetry ? retry : undefined} />;
   }
 
   return (

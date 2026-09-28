@@ -20,7 +20,7 @@ app.use(express.json({ limit: '10kb' }));
 
 // Health check used to confirm the API is up (e.g. by Render).
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ success: true, message: 'API is running' });
+  res.status(200).json({ success: true, data: { status: 'ok' } });
 });
 
 app.use('/api/auth', authRoutes);

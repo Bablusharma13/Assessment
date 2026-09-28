@@ -27,7 +27,7 @@ export function ProjectDetailsPage() {
     return { project, tasks };
   }, [projectId]);
 
-  const { data, setData, isLoading, error, retry } = useLoadData(loadProjectWithTasks);
+  const { data, setData, isLoading, error, canRetry, retry } = useLoadData(loadProjectWithTasks);
 
   // Which dialog is open: null, { type: 'create' }, { type: 'edit', task } or { type: 'delete', task }
   const [dialog, setDialog] = useState(null);
@@ -90,7 +90,7 @@ export function ProjectDetailsPage() {
     return (
       <div className="stack">
         <Link to="/projects">← All projects</Link>
-        <ErrorMessage message={error} onRetry={retry} />
+        <ErrorMessage message={error} onRetry={canRetry ? retry : undefined} />
       </div>
     );
   }

@@ -13,7 +13,7 @@ test('GET /api/health returns 200', async () => {
   const response = await request(app).get('/api/health');
 
   assert.equal(response.status, 200);
-  assert.deepEqual(response.body, { success: true, message: 'API is running' });
+  assert.deepEqual(response.body, { success: true, data: { status: 'ok' } });
 });
 
 test('unknown route returns 404 JSON', async () => {

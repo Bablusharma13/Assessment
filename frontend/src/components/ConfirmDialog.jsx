@@ -24,7 +24,8 @@ export function ConfirmDialog({ title, message, confirmLabel = 'Delete', onConfi
       <p>{message}</p>
       <ErrorMessage message={error} />
       <div className="form-actions">
-        <Button variant="secondary" onClick={onCancel} disabled={isWorking}>
+        {/* Focus starts on the safe choice, so pressing Enter never deletes by accident. */}
+        <Button variant="secondary" onClick={onCancel} disabled={isWorking} autoFocus>
           Cancel
         </Button>
         <Button

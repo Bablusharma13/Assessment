@@ -53,21 +53,22 @@ export async function apiRequest(path, { method = 'GET', body } = {}) {
     throw new ApiError('Cannot reach the server. Please try again.', 0);
   }
 
-  // Our API always returns JSON, but a proxy error page might not.
+  // Our API always returns JSON, but a proxy error page (or a wrong VITE_API_URL) might not.
   const result = await response.json().catch(() => null);
 
-  if (!response.ok) {
-    // The token we sent was rejected (expired or invalid), so the session is over.
-    if (response.status === 401 && token) {
-      handleUnauthorized();
-    }
-
-    throw new ApiError(
-      result?.message || 'Something went wrong. Please try again.',
-      response.status,
-      result?.errors
-    );
+  if (response.ok && result) {
+    return result.data;
   }
 
-  return result.data;
+  // A protected route rejected us (token expired, invalid, or removed by a logout
+  // in another tab), so the session is over. A 401 from login only means a wrong password.
+  if (response.status === 401 && !path.startsWith('/api/auth/')) {
+    handleUnauthorized();
+  }
+
+  // For validation errors the first field message (e.g. "Invalid project id")
+  // is more helpful than the general "Validation failed".
+  const message =
+    result?.errors?.[0]?.message || result?.message || 'Something went wrong. Please try again.';
+  throw new ApiError(message, response.status, result?.errors);
 }
