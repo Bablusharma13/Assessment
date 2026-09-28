@@ -18,7 +18,10 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: { values: TASK_STATUSES, message: 'Status must be one of: Todo, In Progress, Done' },
+      enum: {
+        values: TASK_STATUSES,
+        message: `Status must be one of: ${TASK_STATUSES.join(', ')}`,
+      },
       default: 'Todo',
     },
     // The project this task belongs to.

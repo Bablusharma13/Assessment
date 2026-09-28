@@ -22,7 +22,7 @@ export const registerRules = [
     .withMessage('Password must be at least 8 characters')
     .bail()
     .isByteLength({ max: 72 })
-    .withMessage('Password is too long (maximum 72 characters)'),
+    .withMessage('Password is too long (maximum 72 bytes)'),
 ];
 
 export const loginRules = [

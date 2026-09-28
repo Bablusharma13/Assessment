@@ -88,7 +88,7 @@ describe('POST /api/auth/register', () => {
     for (const response of [asciiResponse, accentResponse]) {
       assert.equal(response.status, 400);
       assert.deepEqual(response.body.errors, [
-        { field: 'password', message: 'Password is too long (maximum 72 characters)' },
+        { field: 'password', message: 'Password is too long (maximum 72 bytes)' },
       ]);
     }
   });

@@ -21,6 +21,12 @@ function normalizeError(error) {
     return { statusCode: 400, message: `Invalid value for ${error.path}` };
   }
 
+  // The document was deleted after we loaded it and before save() (e.g. deleted in another tab).
+  // A fixed message is used because Mongoose's own message contains the query.
+  if (error.name === 'DocumentNotFoundError') {
+    return { statusCode: 404, message: 'This item no longer exists' };
+  }
+
   // MongoDB unique index violation, e.g. two sign-ups with the same email at the same moment.
   if (error.code === 11000) {
     const field = Object.keys(error.keyValue || {})[0] || 'value';

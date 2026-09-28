@@ -45,7 +45,7 @@ export async function deleteProject(req, res) {
   const project = await findOwnedResource(Project, req.params.id, req.user.id, 'Project');
 
   // Tasks are deleted first. If the request fails halfway, the project still exists,
-  // so the user can simply delete it again — no task is ever left without a project.
+  // so the user can simply delete it again and the remaining tasks are removed too.
   await Task.deleteMany({ projectId: project._id });
   await project.deleteOne();
 

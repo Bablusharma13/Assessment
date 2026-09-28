@@ -110,6 +110,7 @@ describe('POST /api/projects', () => {
     assert.equal(response.status, 201);
     assert.notEqual(response.body.data._id, fakeId);
     assert.notEqual(response.body.data.createdAt, '2000-01-01T00:00:00.000Z');
+    assert.notEqual(response.body.data.updatedAt, '2000-01-01T00:00:00.000Z');
   });
 
   test('rejects a missing name with 400', async () => {
