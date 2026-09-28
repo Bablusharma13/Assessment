@@ -4,6 +4,7 @@ import { env } from './config/env.js';
 import { notFound } from './middleware/notFound.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
 
 const app = express();
 
@@ -22,9 +23,9 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/projects', projectRoutes);
 
-// Next modules:
-// app.use('/api/projects', projectRoutes);
+// Next module:
 // app.use('/api/tasks', taskRoutes);
 
 // These two must stay last: unknown routes → 404, then every error → JSON response.
