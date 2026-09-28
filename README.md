@@ -2,12 +2,15 @@
 
 A simple internal tool where a logged-in user creates projects, adds tasks to them and moves each task through **Todo → In Progress → Done**. Every user sees only their own data.
 
-| Deliverable       | Link                                        |
-| ----------------- | ------------------------------------------- |
-| Frontend (Vercel) | `<VERCEL_URL>`                              |
-| Backend (Render)  | `<RENDER_URL>` (health: `/api/health`)      |
-| GitHub repository | https://github.com/Bablusharma13/Assessment |
-| FRD & planning    | [docs/PLANNING.md](docs/PLANNING.md)        |
+| Deliverable       | Link                                                  |
+| ----------------- | ----------------------------------------------------- |
+| Frontend (Vercel) | `<VERCEL_URL>`                                        |
+| Backend (Render)  | https://task-manager-api-jhw6.onrender.com            |
+| Health check      | https://task-manager-api-jhw6.onrender.com/api/health |
+| GitHub repository | https://github.com/Bablusharma13/Assessment           |
+| FRD & planning    | [docs/PLANNING.md](docs/PLANNING.md)                  |
+
+The backend runs on Render's free plan, which sleeps when idle, so the first request can take up to a minute.
 
 ## Features
 
@@ -16,7 +19,7 @@ A simple internal tool where a logged-in user creates projects, adds tasks to th
 - **Tasks:** create, edit and delete tasks inside a project, and change the status from a dropdown on each card.
 - **Ownership:** users can only read or change their own projects and tasks. Another user's item returns `403`, a missing item `404`, and an invalid id `400`.
 - **Validation** on both sides. The backend is the source of truth; the frontend repeats the checks for instant feedback.
-- **Clean UI:** loading, empty, error and success states, a responsive three-column task board, and an automatic logout with a "Session expired" message when the token is no longer valid.
+- **Clean UI:** loading, empty and error states, success toasts in the top-right corner, a responsive three-column task board, and an automatic logout with a "Session expired" message when the token is no longer valid.
 
 ## Tech stack
 
@@ -180,7 +183,9 @@ Status codes: `400` validation or invalid id · `401` missing/invalid/expired to
 
 There are no automated frontend tests; see [Future improvements](#future-improvements).
 
-The deployed version has **not** been tested yet (see [Deployment](#deployment)).
+**Production (backend).** The same API checks were run against the deployed backend (Render + MongoDB Atlas). They covered health, register and login, project and task CRUD, status updates, cross-user `403`s, invalid ids, NoSQL operator payloads, forged or expired tokens, mass assignment and CORS, and all passed. The only difference from local is a URL with broken percent-encoding (e.g. `%E0%A4%A`): Render's edge rejects it before it reaches the app, so it gets an HTML error page instead of the app's JSON `400`. The test users were deleted afterwards.
+
+The deployed frontend has **not** been tested yet (see [Deployment](#deployment)).
 
 ## Deployment
 
