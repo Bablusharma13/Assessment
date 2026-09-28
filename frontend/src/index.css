@@ -244,10 +244,56 @@ textarea.input {
   border-color: #bfdbfe;
 }
 
-.alert-success {
-  color: #166534;
-  background: #f0fdf4;
-  border-color: #bbf7d0;
+/* ---------- Toast ---------- */
+/* Top-right corner. Clicks pass through, so it never blocks a button underneath. */
+.toast-region {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  left: 16px;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  padding: 12px 16px;
+  color: #fff;
+  background: var(--color-success);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  animation: toast-in 0.2s ease-out;
+}
+
+.toast-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
 }
 
 .small {

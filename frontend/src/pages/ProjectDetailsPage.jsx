@@ -8,7 +8,7 @@ import { useFlashMessage } from '../hooks/useFlashMessage';
 import { Button } from '../components/Button';
 import { Loader } from '../components/Loader';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { SuccessMessage } from '../components/SuccessMessage';
+import { Toast } from '../components/Toast';
 import { EmptyState } from '../components/EmptyState';
 import { Modal } from '../components/Modal';
 import { ConfirmDialog } from '../components/ConfirmDialog';
@@ -109,7 +109,7 @@ export function ProjectDetailsPage() {
         <Button onClick={() => setDialog({ type: 'create' })}>New task</Button>
       </div>
 
-      <SuccessMessage message={successMessage} />
+      <Toast message={successMessage} />
       <ErrorMessage message={actionError} />
 
       {tasks.length === 0 ? (
