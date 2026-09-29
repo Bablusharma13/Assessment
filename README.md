@@ -185,7 +185,7 @@ There are no automated frontend tests; see [Future improvements](#future-improve
 
 **Production (backend).** The same API checks were run against the deployed backend (Render + MongoDB Atlas). They covered health, register and login, project and task CRUD, status updates, cross-user `403`s, invalid ids, NoSQL operator payloads, forged or expired tokens, mass assignment and CORS, and all passed. The only difference from local is a URL with broken percent-encoding (e.g. `%E0%A4%A`): Render's edge rejects it before it reaches the app, so it gets an HTML error page instead of the app's JSON `400`. The test users were deleted afterwards.
 
-The deployed frontend has **not** been tested yet (see [Deployment](#deployment)).
+**Production (full flow).** The same browser end-to-end run was repeated on the live URLs (Vercel frontend → Render backend → MongoDB Atlas). Every check passed, including the refresh/deep-link and 375 px mobile checks, with no console errors. The test users were deleted afterwards.
 
 ## Deployment
 
