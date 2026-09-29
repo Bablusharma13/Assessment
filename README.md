@@ -4,7 +4,7 @@ A simple internal tool where a logged-in user creates projects, adds tasks to th
 
 | Deliverable       | Link                                                  |
 | ----------------- | ----------------------------------------------------- |
-| Frontend (Vercel) | `<VERCEL_URL>`                                        |
+| Frontend (Vercel) | https://task-manager-rose-rho.vercel.app                                        |
 | Backend (Render)  | https://task-manager-api-jhw6.onrender.com            |
 | Health check      | https://task-manager-api-jhw6.onrender.com/api/health |
 | GitHub repository | https://github.com/Bablusharma13/Assessment           |
