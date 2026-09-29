@@ -1,0 +1,6 @@
+# Local-only files that `vercel deploy` must not upload.
+# VITE_API_URL comes from the Vercel project settings instead of .env.
+.env
+.env.*
+node_modules
+dist

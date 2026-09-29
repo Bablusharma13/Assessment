@@ -23,5 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment files (never commit secrets)
+# Environment files (never commit secrets). The example file has no secrets.
 .env
+.env*
+!.env.example
+
+# Vercel CLI project link
+.vercel
