@@ -4,7 +4,7 @@
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, '');
 
 if (!API_URL) {
-  throw new Error('VITE_API_URL is not set. Add it to frontend/.env (see README).');
+  throw new Error('VITE_API_URL is not set. Copy .env.example to .env and set it.');
 }
 
 const TOKEN_KEY = 'token';

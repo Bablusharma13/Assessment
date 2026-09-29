@@ -89,38 +89,25 @@ Express API (Render)
 
 ### 1. Backend
 
-Create `backend/.env`:
-
-```
-PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/task-manager
-JWT_SECRET=<long random string, see below>
-FRONTEND_URL=http://localhost:5173
-```
-
 ```bash
 cd backend
 npm install
+cp .env.example .env      # then fill in the values (see below)
 npm run dev               # http://localhost:5000, check /api/health
 ```
 
 ### 2. Frontend (in a second terminal)
 
-Create `frontend/.env`:
-
-```
-VITE_API_URL=http://localhost:5000
-```
-
 ```bash
 cd frontend
 npm install
+cp .env.example .env      # VITE_API_URL=http://localhost:5000
 npm run dev               # http://localhost:5173
 ```
 
 ### Environment variables
 
-`backend/.env`:
+`backend/.env.example`:
 
 | Variable       | Description                                               | Local example                            |
 | -------------- | --------------------------------------------------------- | ---------------------------------------- |
@@ -134,13 +121,13 @@ Generate a secret: `node -p "require('crypto').randomBytes(32).toString('hex')"`
 
 The server refuses to start if a required variable is missing or if `FRONTEND_URL` is `*`. A trailing slash or stray spaces in `FRONTEND_URL` are removed automatically.
 
-`frontend/.env`:
+`frontend/.env.example`:
 
 | Variable       | Description                          | Local example           |
 | -------------- | ------------------------------------ | ----------------------- |
 | `VITE_API_URL` | Backend base URL (no trailing slash) | `http://localhost:5000` |
 
-`.env` files are git-ignored and never committed. On Render and Vercel, the same variables are set in the dashboard.
+`.env` files are git-ignored; only the `.env.example` files are committed.
 
 ### Scripts
 
