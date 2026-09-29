@@ -4,7 +4,7 @@ A simple internal tool where a logged-in user creates projects, adds tasks to th
 
 | Deliverable       | Link                                                  |
 | ----------------- | ----------------------------------------------------- |
-| Frontend (Vercel) | https://task-manager-rose-rho.vercel.app                                        |
+| Frontend (Vercel) | https://task-manager-rose-rho.vercel.app              |
 | Backend (Render)  | https://task-manager-api-jhw6.onrender.com            |
 | Health check      | https://task-manager-api-jhw6.onrender.com/api/health |
 | GitHub repository | https://github.com/Bablusharma13/Assessment           |
@@ -191,7 +191,7 @@ The deployed frontend has **not** been tested yet (see [Deployment](#deployment)
 
 1. **MongoDB Atlas.** Create a free cluster and a database user. Under _Network Access_, allow `0.0.0.0/0` (Render has no fixed IP on the free plan). Copy the `mongodb+srv://…` connection string and add a database name, e.g. `…mongodb.net/task-manager`.
 2. **Render (backend).** Create a new _Web Service_ from the GitHub repo with root directory `backend`, build command `npm install` and start command `npm start`. Set `MONGODB_URI`, `JWT_SECRET` and `FRONTEND_URL`, plus `NODE_ENV=production`. Render sets `PORT` itself. Check that `https://<RENDER_URL>/api/health` returns `200`.
-3. **Vercel (frontend).** Import the repo with root directory `frontend` (the Vite preset is detected). Set `VITE_API_URL=https://<RENDER_URL>`. Vite bakes this value in at build time, so redeploy after changing it. `vercel.json` rewrites all paths to `index.html`, so refreshing `/projects/123` works.
+3. **Vercel (frontend).** Import the repo with root directory `frontend`, or deploy from the `frontend` folder with the Vercel CLI (`npx vercel --prod`), which is how this project is deployed. Set `VITE_API_URL=https://<RENDER_URL>`. Vite bakes this value in at build time, so redeploy after changing it. `vercel.json` sets the Vite preset (output `dist`) and rewrites all paths to `index.html`, so refreshing `/projects/123` works. `.vercelignore` keeps local `.env` files out of CLI uploads.
 4. **CORS.** Set `FRONTEND_URL` on Render to the exact Vercel URL, e.g. `https://my-app.vercel.app`, with no trailing slash and no `*`, then redeploy the backend.
 
 **Production check** (run on the deployed URLs before sharing them):
